@@ -18,9 +18,6 @@ function App() {
     fetch(`http://localhost:3001/areas`)
       .then(r => r.json())
       .then(data => setAreas(data))
-  }, [])
-
-  useEffect(() => {
     fetch(`http://localhost:3001/hosts`)
       .then(r => r.json())
       .then(data => setHosts(data))
@@ -108,6 +105,7 @@ function App() {
 
       setIsActivated(!isActivated)
       setHosts(newArray)
+      !isActivated ? setLogs([Log.warn(`Activating all hosts!`), ...logs]) : setLogs([Log.notify(`Deacommissioning all hosts.`), ...logs])
     
     
   }
