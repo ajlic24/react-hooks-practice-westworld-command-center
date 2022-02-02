@@ -1,18 +1,26 @@
 import React from "react";
 import "../stylesheets/Area.css";
+import HostList from "./HostList";
 
-function Area() {
+function Area({area, hosts, onClick, clickedImage}) {
+  const {id, name, limit, auth_req} = area
+
+  const toShow = hosts.filter(host => host.area === name && host.active === true)
+
   return (
     <div
       className="area"
       id={
-        /* Pass in the area name here to make sure this is styled correctly */ "id"
+        name
       }
     >
       <h3 className="labels">
-        {/* Don't just pass in the name from the data...clean that thing up */}
+        {name.replace(/_/g, ' ').split(' ').map(word => {
+          return word[0].toUpperCase() + word.slice(1)
+        }).join(' ')
+        }
       </h3>
-      {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
+        <HostList hosts={toShow} onClick={onClick} clickedImage={clickedImage} />
     </div>
   );
 }
